@@ -1,0 +1,14 @@
+{
+	"name": "chat-lib",
+	"version": "1.0.0",
+	"license": "MIT",
+	"private": true,
+	"dependencies": {
+		"uuid": "^3.3.2"
+	},
+	"devDependencies": {
+		"typesafe-actions": "^3.2.1",
+		"@types/uuid": "^3.4.4",
+		"typescript": "^3.3.4000"
+	}
+}
