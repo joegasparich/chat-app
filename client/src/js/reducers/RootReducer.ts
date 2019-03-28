@@ -19,11 +19,7 @@ const initialState: IRootState = {
 };
 
 const rootReducer: Reducer<IRootState> = (state: IRootState = initialState, action: Actions) => {
-	// Cancel action if it was meant for server
-	if (action.meta && action.meta.remote) {
-		return state;
-	}
-
+	// Declare variables here since switch statements aren't scoped
 	let channels: IChannel[];
 	let channel: IChannel | undefined;
 
@@ -37,7 +33,7 @@ const rootReducer: Reducer<IRootState> = (state: IRootState = initialState, acti
 		case ActionTypes.ADD_MESSAGE:
 			channels = [...state.channels];
 			channel = state.channels.find((c: IChannel) => c.id === action.payload.channelID);
-			if (!channel) return state;
+			if (!channel) return Object.assign({}, state);
 
 			channel.messages = channel.messages.concat(action.payload.message);
 			return Object.assign({}, state, {
@@ -47,7 +43,7 @@ const rootReducer: Reducer<IRootState> = (state: IRootState = initialState, acti
 		case ActionTypes.ADD_MESSAGES:
 			channels = [...state.channels];
 			channel = channels.find((c: IChannel) => c.id === action.payload.channelID);
-			if (!channel) return state;
+			if (!channel) return Object.assign({}, state);
 
 			channel.messages = channel.messages.concat(action.payload.messages); // Append
 			return Object.assign({}, state, {
@@ -57,7 +53,7 @@ const rootReducer: Reducer<IRootState> = (state: IRootState = initialState, acti
 		case ActionTypes.UPDATE_MESSAGES:
 			channels = [...state.channels];
 			channel = channels.find((c: IChannel) => c.id === action.payload.channelID);
-			if (!channel) return state;
+			if (!channel) return Object.assign({}, state);
 
 			channel.messages = action.payload.messages; // Overwrite
 			return Object.assign({}, state, {
@@ -75,7 +71,7 @@ const rootReducer: Reducer<IRootState> = (state: IRootState = initialState, acti
 			});
 		// User changes channel
 		case ActionTypes.CHANGE_CHANNEL:
-			if (!state.user) return state;
+			if (!state.user) return Object.assign({}, state);
 			const user = Object.assign({}, state.user);
 			user.channelID = action.payload.channelID;
 
@@ -91,7 +87,7 @@ const rootReducer: Reducer<IRootState> = (state: IRootState = initialState, acti
 				channels: state.channels.concat(action.payload.channels),
 			});
 		default:
-			return state;
+			return Object.assign({}, state);
 	}
 };
 

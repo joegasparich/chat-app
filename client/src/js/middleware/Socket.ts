@@ -17,8 +17,10 @@ export default (socket: SocketIOClient.Socket) => (store: Store) => {
 	});
 
 	return (next: (action: Actions) => Actions) => (action: Actions) => {
+		// If action is flagged as remote, send it to the server and cancel the action
 		if (action.meta && action.meta.remote) {
 			socket.emit(action.type, action);
+			return;
 		}
 		return next(action);
 	};
