@@ -1,0 +1,47 @@
+{
+	"name": "redux-test",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"scripts": {
+		"start": "webpack-dev-server --mode development",
+		"build": "webpack --mode production"
+	},
+	"dependencies": {
+		"@emotion/core": "^10.0.9",
+		"@emotion/styled": "^10.0.9",
+		"@types/uuid": "^3.4.4",
+		"babel-runtime": "^6.26.0",
+		"emoji-mart": "^2.9.2",
+		"react": "^16.8.3",
+		"react-dom": "^16.8.3",
+		"react-hot-loader": "^4.7.1",
+		"react-redux": "^6.0.1",
+		"redux": "^4.0.1",
+		"semantic-ui-css": "^2.4.1",
+		"semantic-ui-react": "^0.85.0",
+		"socket.io-client": "^2.2.0",
+		"socketio-wildcard": "^2.0.0",
+		"uuid": "^3.3.2",
+		"yarn": "^1.13.0"
+	},
+	"devDependencies": {
+		"@types/emoji-mart": "^2.8.2",
+		"@types/node": "^11.9.5",
+		"@types/react": "^16.8.5",
+		"@types/react-dom": "^16.8.2",
+		"@types/react-redux": "^7.0.1",
+		"@types/socket.io-client": "^1.4.32",
+		"@types/socketio-wildcard": "^2.0.1",
+		"awesome-typescript-loader": "^5.2.1",
+		"css-loader": "^2.1.1",
+		"file-loader": "^3.0.1",
+		"source-map-loader": "^0.2.4",
+		"style-loader": "^0.23.1",
+		"typesafe-actions": "^3.2.1",
+		"typescript": "^3.3.3333",
+		"webpack": "^4.29.5",
+		"webpack-cli": "^3.2.3",
+		"webpack-dev-server": "^3.2.1"
+	}
+}

@@ -1,0 +1,24 @@
+{
+	"compilerOptions": {
+		"outDir": "./dist/",
+		"sourceMap": true,
+		"strictNullChecks": true,
+		"module": "es6",
+		"moduleResolution": "node",
+		"jsx": "react",
+		"target": "es5",
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"noEmitOnError": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noUnusedLocals": true,
+		"baseUrl": ".",
+		"paths": {
+			"@lib/*": ["../lib/*"]
+		}
+	},
+	"include": ["./src/"]
+}

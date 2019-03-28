@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"outDir": "dist",
+		"module": "esnext",
+		"moduleResolution": "node",
+		"target": "es2017",
+		"allowSyntheticDefaultImports": true,
+		"noEmitOnError": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noUnusedLocals": true,
+		"sourceMap": true,
+		"baseUrl": ".",
+		"paths": {
+			"@lib/*": ["../lib/*"]
+		}
+	},
+	"include": ["src/**/*"]
+}
