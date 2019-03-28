@@ -7,7 +7,7 @@ import IUser from "@lib/types/User";
 import { IRootState } from "../store";
 
 interface IProps {
-	user: IUser | undefined;
+	user: IUser;
 	usersTyping: IUser[];
 }
 interface IState {}
@@ -18,11 +18,8 @@ class TypingIndicator extends React.Component<IProps, IState> {
 	public readonly state = {};
 
 	public render(): JSX.Element {
-		if (!this.props.user) return <div id="typing-indicator" css={Styles} />;
-		const channelID: string = this.props.user.channelID;
-
 		const users: string[] = this.props.usersTyping
-			.filter((user: IUser) => user.channelID === channelID)
+			.filter((user: IUser) => user.channelID === this.props.user.channelID)
 			.map((user: IUser) => user.name);
 		const typingMessage: string = this.props.usersTyping.length > 0 ? users.join(", ") + " typing..." : "";
 

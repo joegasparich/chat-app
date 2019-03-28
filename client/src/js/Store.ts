@@ -15,7 +15,7 @@ const patch = wildcard(io.Manager);
 patch(socket);
 
 export interface IRootState {
-	user?: IUser;
+	user: IUser;
 	messages: IMessage[];
 	channels: IChannel[];
 	usersOnline: IUser[];

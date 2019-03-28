@@ -10,7 +10,7 @@ import { IRootState } from "../store";
 import Message from "./Message";
 
 interface IProps {
-	user: IUser | undefined;
+	user: IUser;
 	channels: IChannel[];
 }
 
@@ -45,10 +45,11 @@ class Messages extends React.Component<IProps, IState> {
 	}
 
 	public render(): JSX.Element {
-		if (!this.props.channels || !this.props.user) return <div id="messages" css={Styles} ref={this.messagesRef} />;
-		const channelID: string = this.props.user.channelID;
+		if (!this.props.channels) return <div id="messages" css={Styles} ref={this.messagesRef} />;
 
-		const channel: IChannel | undefined = this.props.channels.find((c: IChannel) => c.id === channelID);
+		const channel: IChannel | undefined = this.props.channels.find(
+			(c: IChannel) => c.id === this.props.user.channelID,
+		);
 		if (!channel) return <div id="messages" css={Styles} ref={this.messagesRef} />;
 
 		const messageList: JSX.Element[] = channel.messages.map((message: IMessage) => (

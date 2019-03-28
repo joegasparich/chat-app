@@ -6,7 +6,12 @@ import ActionTypes from "@lib/constants/ActionTypes";
 import IChannel from "@lib/types/Channel";
 
 const initialState: IRootState = {
-	user: undefined,
+	// Blank user to avoid null checks
+	user: {
+		id: "0",
+		name: "No-one",
+		channelID: "1",
+	},
 	messages: [],
 	channels: [],
 	usersOnline: [],

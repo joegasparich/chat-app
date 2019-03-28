@@ -13,7 +13,7 @@ interface IProps {
 
 class App extends React.Component<IProps, {}> {
 	public render(): JSX.Element {
-		return <div className="App">{!this.props.user ? <LogIn /> : <Chat />}</div>;
+		return <div className="App">{this.props.user.id === "0" ? <LogIn /> : <Chat />}</div>;
 	}
 }
 
