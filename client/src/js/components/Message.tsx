@@ -1,13 +1,17 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import * as React from "react";
-import { connect } from "react-redux";
 
 import IUser from "@lib/types/User";
-import { IRootState } from "../store";
+
+export enum MessageType {
+	Sent = "sent",
+	Received = "received",
+	Server = "server",
+}
 
 interface IProps {
-	currentUser: IUser;
+	type: MessageType;
 	source: IUser;
 	content: string;
 }
@@ -33,14 +37,9 @@ class Message extends React.Component<IProps, IState> {
 
 	public render(): JSX.Element {
 		const fromServer: boolean = this.props.source.id === "1";
-		const sourceClass: string = fromServer
-			? "server"
-			: this.props.source.id === this.props.currentUser.id
-			? "sent"
-			: "received";
 
 		return (
-			<div css={Styles} className={"message " + sourceClass}>
+			<div css={Styles} className={"message " + this.props.type}>
 				{!fromServer && <strong>{this.props.source.name}: </strong>}
 				{this.props.content}
 			</div>
@@ -48,13 +47,4 @@ class Message extends React.Component<IProps, IState> {
 	}
 }
 
-const mapStateToProps = (state: IRootState) => {
-	return {
-		currentUser: state.user,
-	};
-};
-
-export default connect(
-	mapStateToProps,
-	null,
-)(Message);
+export default Message;

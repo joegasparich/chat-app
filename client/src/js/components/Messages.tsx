@@ -7,7 +7,7 @@ import IChannel from "@lib/types/Channel";
 import IMessage from "@lib/types/Message";
 import IUser from "@lib/types/User";
 import { IRootState } from "../store";
-import Message from "./Message";
+import Message, { MessageType } from "./Message";
 
 interface IProps {
 	user: IUser;
@@ -52,11 +52,20 @@ class Messages extends React.Component<IProps, IState> {
 		);
 		if (!channel) return <div id="messages" css={Styles} ref={this.messagesRef} />;
 
-		const messageList: JSX.Element[] = channel.messages.map((message: IMessage) => (
-			<li key={message.id}>
-				<Message source={message.user} content={message.content} />
-			</li>
-		));
+		const messageList: JSX.Element[] = channel.messages.map((message: IMessage) => {
+			const type: MessageType =
+				message.user.id === "1" ?
+				MessageType.Server :
+				message.user.id === this.props.user.id ?
+				MessageType.Sent :
+				MessageType.Received;
+
+			return(
+				<li key={message.id}>
+					<Message source={message.user} content={message.content} type={type} />
+				</li>
+			)
+		});
 
 		return (
 			<div id="messages" css={Styles} ref={this.messagesRef}>
