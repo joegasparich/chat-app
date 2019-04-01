@@ -11,9 +11,9 @@ export enum MessageType {
 }
 
 interface IProps {
-	type: MessageType;
 	source: IUser;
 	content: string;
+	type: MessageType;
 }
 interface IState {}
 

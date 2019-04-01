@@ -34,7 +34,6 @@ class Messages extends React.Component<IProps, IState> {
 	private messagesRef = React.createRef<HTMLDivElement>();
 
 	// Lifecycle Methods
-
 	// TODO: Find a way to only scroll if a new message
 	public componentDidMount() {
 		this.scrollToBottom();
@@ -45,26 +44,27 @@ class Messages extends React.Component<IProps, IState> {
 	}
 
 	public render(): JSX.Element {
-		if (!this.props.channels) return <div id="messages" css={Styles} ref={this.messagesRef} />;
-
+		// Get current channel
 		const channel: IChannel | undefined = this.props.channels.find(
 			(c: IChannel) => c.id === this.props.user.channelID,
 		);
+		// If in non-existent channel then show empty div
 		if (!channel) return <div id="messages" css={Styles} ref={this.messagesRef} />;
 
+		// Generate message components
 		const messageList: JSX.Element[] = channel.messages.map((message: IMessage) => {
 			const type: MessageType =
-				message.user.id === "1" ?
-				MessageType.Server :
-				message.user.id === this.props.user.id ?
-				MessageType.Sent :
-				MessageType.Received;
+				message.user.id === "1"
+					? MessageType.Server
+					: message.user.id === this.props.user.id
+					? MessageType.Sent
+					: MessageType.Received;
 
-			return(
+			return (
 				<li key={message.id}>
 					<Message source={message.user} content={message.content} type={type} />
 				</li>
-			)
+			);
 		});
 
 		return (
@@ -74,6 +74,7 @@ class Messages extends React.Component<IProps, IState> {
 		);
 	}
 
+	// Scrolls to the bottom of the element
 	private scrollToBottom() {
 		const div = this.messagesRef.current;
 		if (div) {
@@ -85,6 +86,7 @@ class Messages extends React.Component<IProps, IState> {
 	}
 }
 
+// Redux methods
 const mapStateToProps = (state: IRootState): IProps => {
 	return {
 		user: state.user,

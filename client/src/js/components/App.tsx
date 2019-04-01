@@ -17,6 +17,8 @@ class App extends React.Component<IProps, {}> {
 	}
 }
 
+/* Redux Methods */
+
 const mapStateToProps = (state: IRootState) => {
 	return { user: state.user };
 };

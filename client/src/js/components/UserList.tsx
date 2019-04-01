@@ -46,6 +46,8 @@ class UserList extends React.Component<IProps, IState> {
 	}
 }
 
+/* Redux Methods */
+
 const mapStateToProps = (state: IRootState) => {
 	return { usersOnline: state.usersOnline };
 };

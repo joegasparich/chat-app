@@ -119,16 +119,23 @@ class MessageBox extends React.Component<IProps, IState> {
 		);
 	}
 
+	/* Handlers */
+
 	// Handles message box input
 	private handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
-		this.setState({ content: event.currentTarget.value });
-
+		// Send start typing message if wasn't already typing
 		if (!this.state.typing) {
-			this.setState({ typing: true });
 			this.props.startTyping(this.props.user);
 		}
 
-		this.setState({ lastTyped: new Date() });
+		// Update state
+		this.setState({
+			content: event.currentTarget.value,
+			typing: true,
+			lastTyped: new Date(),
+		});
+
+		// Send stop typing message if haven't typed for 1 second
 		setTimeout(() => {
 			if (new Date().getTime() > this.state.lastTyped.getTime() + 999) {
 				this.setState({ typing: false });
@@ -141,10 +148,14 @@ class MessageBox extends React.Component<IProps, IState> {
 	private handleSubmit = (event: React.FormEvent): void => {
 		event.preventDefault();
 
+		// Prevent sending an empty message
+		// TODO: expand to trim whitespace
 		if (!this.state.content) return;
 
+		// Send messge
 		this.props.addMessage(this.props.user, this.state.content);
 
+		// Empty the message box
 		this.setState({
 			content: "",
 		});
@@ -152,10 +163,12 @@ class MessageBox extends React.Component<IProps, IState> {
 
 	// Checks for clicks outside of the emoji panel
 	private handleClick = (event: MouseEvent): void => {
+		// Check emoji panel exists
 		if (!this.state.showEmojis) return;
 		if (!this.emojiPanelRef.current) return;
 		if (!(event.target instanceof Element)) return;
 
+		// If clicked somewhere other than the emoji panel or button then close it
 		if (!this.emojiPanelRef.current.contains(event.target) && event.target.id !== "emoji-button") {
 			this.setState({
 				showEmojis: false,
@@ -172,7 +185,8 @@ class MessageBox extends React.Component<IProps, IState> {
 		});
 	};
 
-	// Converts emoji code into unicode and appends it to the message
+	// Appends an emoji to the message
+	// TODO: insert emoji at cursor position
 	private addEmoji = (emoji: EmojiData) => {
 		this.setState({
 			content: this.state.content + emoji.colons,

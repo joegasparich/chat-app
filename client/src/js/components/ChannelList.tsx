@@ -76,6 +76,7 @@ class ChannelList extends React.Component<IProps, IState> {
 			</li>
 		));
 
+		// Note: Modal is a list element because it is rendered as the New button
 		return (
 			<div id="channel-list" css={Styles}>
 				<h3>Channels:</h3>
@@ -116,6 +117,18 @@ class ChannelList extends React.Component<IProps, IState> {
 		);
 	}
 
+	/* Handlers */
+
+	// Manually control modal so that we can close on submit
+	private handleModalOpen = (): void => {
+		this.setState({ modalOpen: true });
+	};
+
+	private handleModalClose = (): void => {
+		this.setState({ modalOpen: false });
+	};
+
+	// Close modal on channel submit
 	private handleNewChannel = (event: React.FormEvent): void => {
 		event.preventDefault();
 
@@ -126,26 +139,22 @@ class ChannelList extends React.Component<IProps, IState> {
 		this.props.addChannel(this.state.newChannelName);
 	};
 
+	// Update new channel name
 	private handleChannelNameChange = (event: React.FormEvent<HTMLInputElement>): void => {
 		this.setState({
 			newChannelName: event.currentTarget.value,
 		});
 	};
 
+	// Change channel
 	private handleChangeChannel = (event: React.MouseEvent<HTMLSpanElement>): void => {
 		const channelID = event.currentTarget.id;
 
 		this.props.changeChannel(this.props.user.id, channelID);
 	};
-
-	private handleModalOpen = (): void => {
-		this.setState({ modalOpen: true });
-	};
-
-	private handleModalClose = (): void => {
-		this.setState({ modalOpen: false });
-	};
 }
+
+/* Redux Methods */
 
 const mapStateToProps = (state: IRootState) => {
 	return { channelList: state.channels, user: state.user };

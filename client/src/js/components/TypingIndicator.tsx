@@ -18,9 +18,12 @@ class TypingIndicator extends React.Component<IProps, IState> {
 	public readonly state = {};
 
 	public render(): JSX.Element {
+		// Get typing users
 		const users: string[] = this.props.usersTyping
 			.filter((user: IUser) => user.channelID === this.props.user.channelID)
 			.map((user: IUser) => user.name);
+
+		// Generate string
 		const typingMessage: string = this.props.usersTyping.length > 0 ? users.join(", ") + " typing..." : "";
 
 		return (
@@ -30,6 +33,8 @@ class TypingIndicator extends React.Component<IProps, IState> {
 		);
 	}
 }
+
+/* Redux Methods */
 
 const mapStateToProps = (state: IRootState) => {
 	return {
